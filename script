@@ -1,0 +1,63 @@
+const API_URL = https://script.google.com/macros/s/AKfycbzoLVB9wvW6djkOVNCGmGEU4PcBXFBU0CdK4uZ6zIn_l59YuzXbvwL5FZ5mH1tDopbn/exec;
+
+async function simpanData() {
+    const data = {
+        nama: document.getElementById('nama').value,
+        kelas: document.getElementById('kelas').value,
+        pembimbing: document.getElementById('pembimbing').value,
+        tahsin: document.getElementById('tahsin').value,
+        halaman_tahsin: document.getElementById('halaman_tahsin').value,
+        nilai_tahsin: document.getElementById('nilai_tahsin').value,
+        tahfiz: document.getElementById('tahfiz').value,
+        ayat: document.getElementById('ayat').value,
+        nilai_tahfiz: document.getElementById('nilai_tahfiz').value
+    };
+
+    try {
+        await fetch(API_URL, {
+            method: 'POST',
+            body: new URLSearchParams(data)
+        });
+        alert('Data tersimpan!');
+        loadData();
+    } catch (error) {
+        alert('Error menyimpan data');
+    }
+}
+
+async function loadData() {
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        renderTable(data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+function renderTable(data) {
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+    
+    data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${new Date(row.tanggal).toLocaleDateString()}</td>
+            <td>${row.nama}</td>
+            <td>${row.kelas}</td>
+            <td>${row.pembimbing}</td>
+            <td>${row.tahsin} (hal. ${row.halaman_tahsin})</td>
+            <td>${row.nilai_tahsin}</td>
+            <td>${row.tahfiz} - ${row.ayat}</td>
+            <td>${row.nilai_tahfiz}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// Event Listeners
+document.getElementById('search').addEventListener('input', loadData);
+document.getElementById('filterKelas').addEventListener('change', loadData);
+
+// Load initial data
+loadData();

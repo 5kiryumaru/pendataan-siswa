@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pendataan Siswa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Form Pendataan Siswa</h1>
+        
+        <!-- Form Input -->
+        <div class="form-section">
+            <input type="text" id="nama" placeholder="Nama Siswa">
+            <input type="text" id="kelas" placeholder="Kelas">
+            <input type="text" id="pembimbing" placeholder="Pembimbing">
+            
+            <div class="section">
+                <h3>Tahsin</h3>
+                <input type="text" id="tahsin" placeholder="Tahsin">
+                <input type="number" id="halaman_tahsin" placeholder="Halaman">
+                <input type="number" id="nilai_tahsin" placeholder="Nilai">
+            </div>
+
+            <div class="section">
+                <h3>Tahfiz</h3>
+                <input type="text" id="tahfiz" placeholder="Tahfiz">
+                <input type="text" id="ayat" placeholder="Ayat">
+                <input type="number" id="nilai_tahfiz" placeholder="Nilai">
+            </div>
+
+            <button onclick="simpanData()">Simpan</button>
+        </div>
+
+        <!-- Filter & Pencarian -->
+        <div class="filter-section">
+            <input type="text" id="search" placeholder="Cari nama...">
+            <select id="filterKelas">
+                <option value="">Semua Kelas</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+            </select>
+        </div>
+
+        <!-- Tabel Data -->
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Pembimbing</th>
+                        <th>Tahsin</th>
+                        <th>Nilai Tahsin</th>
+                        <th>Tahfiz</th>
+                        <th>Nilai Tahfiz</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
